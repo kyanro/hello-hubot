@@ -19,11 +19,11 @@ client = new Twitter({
 
 module.exports = (robot) ->
 	robot.respond /search (.*)/, (res) ->
-		# res.send "#{res.match[1]} を twitter から検索するよ"
+		res.send "#{res.match[1]} を twitter から検索するよ"
 		query = {}
 		query.q = res.match[1]
 		query.count = 1;
 		client.get('search/tweets', query, (error, tweets, response) -> 
 			name = tweets.statuses[0]['user']['screen_name']
-			console.log "#{name}: #{tweets.statuses[0]['text']}"
+			res.send "#{name}: #{tweets.statuses[0]['text']}"
 		)
